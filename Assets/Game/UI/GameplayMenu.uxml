@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/GameplayMenu.uss?fileID=7433441132597879392&amp;guid=17e3aeb6f7d260844b7357e0c370aec6&amp;type=3#GameplayMenu" />
+    <ui:VisualElement name="parent-container">
+        <ui:VisualElement name="top-container">
+            <ui:VisualElement name="status-container">
+                <ui:ProgressBar name="life-bar" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="center-container" />
+        <ui:VisualElement name="bottom-container">
+            <ui:VisualElement name="inventory" style="justify-content: space-between;">
+                <ui:VisualElement name="item" />
+                <ui:VisualElement name="item" />
+                <ui:VisualElement name="item" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
