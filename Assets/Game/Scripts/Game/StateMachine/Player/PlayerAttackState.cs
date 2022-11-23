@@ -49,14 +49,7 @@ namespace Scripts.Game.StateMachine.Player
             }
             else
             {
-                if (playerStateMachine.Targeter.CurrentTarget == null)
-                {
-                    playerStateMachine.SwitchState(new PlayerGroundedState(playerStateMachine));
-                }
-                else
-                {
-                    playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
-                }
+                ReturnToLocomotion();
             }
 
             _previousFrameTime = normalizedTime;

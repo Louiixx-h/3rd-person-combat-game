@@ -8,6 +8,8 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Enter()
     {
         playerStateMachine.InputReader.TargetEvent += HandleCancelTargeting;
+        playerStateMachine.InputReader.JumpEvent += OnJump;
+        
         playerStateMachine.Animator.CrossFadeInFixedTime("TargetingBlendTree", 0.1f);
         playerStateMachine.Animator.SetLayerWeight(1, 1f);
         playerStateMachine.Animator.SetBool("IsEquippingTheWeapon", true);
@@ -16,6 +18,8 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Exit()
     {
         playerStateMachine.InputReader.TargetEvent -= HandleCancelTargeting;
+        playerStateMachine.InputReader.JumpEvent -= OnJump;
+
         playerStateMachine.Targeter.Cancel();
         playerStateMachine.Animator.SetLayerWeight(1, 0);
         playerStateMachine.EquippedWeapon.SaveWeapon();
@@ -77,5 +81,10 @@ public class PlayerTargetingState : PlayerBaseState
         movement.y = 0;
 
         return movement;
+    }
+
+    private void OnJump()
+    {
+        playerStateMachine.SwitchState(new PlayerJumpingState(playerStateMachine));
     }
 }

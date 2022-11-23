@@ -13,9 +13,11 @@ namespace Scripts.Game.StateMachine.Player
         [field: SerializeField] public Attack[] Attacks { get; private set; }
         [field: SerializeField] public EquippedWeapon EquippedWeapon { get; private set; }
         [field: SerializeField] public WeaponDamage WeaponDamage { get; private set; }
-        [field: SerializeField] public float MovementSpeed { get; private set; }
+        [field: SerializeField] public float RunningSpeed { get; private set; }
+        [field: SerializeField] public float FastRunningSpeed { get; private set; }
         [field: SerializeField] public float TargetingMovementSpeed { get; private set; }
         [field: SerializeField] public float RotationSpeed { get; private set; }
+        [field: SerializeField] public float JumpForce { get; private set; }
         [field: SerializeField] public float MaxLife { get; private set; } = 100;
         [field: SerializeField] public float CurrentLife { get; private set; }
 

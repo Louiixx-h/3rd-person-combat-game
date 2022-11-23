@@ -2122,10 +2122,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3973885657868735671, guid: 4344942acf776e3489c2c8e83c127a89, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.00000017206382
-      objectReference: {fileID: 0}
     - target: {fileID: 3973885657875483032, guid: 4344942acf776e3489c2c8e83c127a89, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2178,22 +2174,6 @@ PrefabInstance:
       propertyPath: m_ChildCameras.Array.size
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3973885658739348493, guid: 4344942acf776e3489c2c8e83c127a89, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.000000004290955
-      objectReference: {fileID: 0}
-    - target: {fileID: 3973885658739348493, guid: 4344942acf776e3489c2c8e83c127a89, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 3.0237354e-10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3973885658963733475, guid: 4344942acf776e3489c2c8e83c127a89, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.000000017024002
-      objectReference: {fileID: 0}
-    - target: {fileID: 3973885658963733475, guid: 4344942acf776e3489c2c8e83c127a89, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.000000002498593
-      objectReference: {fileID: 0}
     - target: {fileID: 3973885659765663548, guid: 4344942acf776e3489c2c8e83c127a89, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.000000004284763
@@ -2210,7 +2190,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-19738
+  m_Name: pb_Mesh28894
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2407,7 +2387,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-45548
+  m_Name: pb_Mesh28846
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2651,7 +2631,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -2676,8 +2656,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
-  m_LocalRotation: {x: 0.14521316, y: -0.000000017024002, z: 0.000000002498593, w: 0.98940045}
-  m_LocalPosition: {x: 0, y: 3.7, z: 42.9}
+  m_LocalRotation: {x: 0.08837837, y: 0.0000000042847637, z: -3.8016806e-10, w: 0.996087}
+  m_LocalPosition: {x: 0, y: 3.5, z: 41.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -34,5 +34,17 @@ namespace Scripts.Game.StateMachine.Player
 
             playerStateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
         }
+
+        protected void ReturnToLocomotion()
+        {
+            if(playerStateMachine.Targeter.CurrentTarget == null)
+            {
+                playerStateMachine.SwitchState(new PlayerGroundedState(playerStateMachine));
+            }
+            else
+            {
+                playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
+            }
+        }
     }
 }

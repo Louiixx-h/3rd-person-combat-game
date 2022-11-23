@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     public bool IsAttacking { get; private set; }
+
     public Vector2 MovementValue {get; private set;}
     public Action JumpEvent;
-    public Action DodgeEvent;
     public Action TargetEvent;
+    public Action<InputAction.CallbackContext> DodgeEvent;
 
     Controls _controls;
     
@@ -31,11 +32,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         JumpEvent?.Invoke();
     }
 
-    public void OnDodge(InputAction.CallbackContext context) 
+    public void OnDodge(InputAction.CallbackContext context)
     {
-        if(!context.performed) return;
-
-        DodgeEvent?.Invoke();
+        DodgeEvent?.Invoke(context);
     }
 
     public void OnMove(InputAction.CallbackContext context) 

@@ -1,21 +1,30 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Game.StateMachine.Player
 {
     public class PlayerGroundedState : PlayerBaseState
     {
+        private bool _isDodgePressed = false;
+
         public PlayerGroundedState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
         public override void Enter()
         {
-            playerStateMachine.InputReader.TargetEvent += HandleTarget;
+            playerStateMachine.InputReader.TargetEvent += OnTarget;
+            playerStateMachine.InputReader.DodgeEvent += OnDodge;
+            playerStateMachine.InputReader.JumpEvent += OnJump;
+
             playerStateMachine.Animator.CrossFadeInFixedTime("GroundedBlendTree", 0.1f);
         }
 
         public override void Exit()
         {
+            playerStateMachine.InputReader.TargetEvent -= OnTarget;
+            playerStateMachine.InputReader.DodgeEvent -= OnDodge;
+            playerStateMachine.InputReader.JumpEvent -= OnJump;
+
             playerStateMachine.Animator.SetFloat("MovementSpeed", 0);
-            playerStateMachine.InputReader.TargetEvent -= HandleTarget;
         }
 
         public override void Tick(float deltaTime)
@@ -29,22 +38,46 @@ namespace Scripts.Game.StateMachine.Player
             HandleMove(deltaTime);
         }
 
-        void HandleMove(float deltaTime)
+        private void HandleMove(float deltaTime)
         {
+            var movement = CalculateMovement(deltaTime);
+            
             if (playerStateMachine.InputReader.MovementValue == Vector2.zero)
             {
-                playerStateMachine.Animator.SetFloat("MovementSpeed", 0, 0.1f, deltaTime);
-                Move(Vector3.zero * playerStateMachine.MovementSpeed, deltaTime);
+                HandleIdle(deltaTime);
                 return;
             }
 
-            Vector3 movement = CalculateMovement(deltaTime);
+            if(_isDodgePressed)
+            {
+                HandleFastRunning(movement, deltaTime);
+                return;
+            }
 
-            Move(movement * playerStateMachine.MovementSpeed, deltaTime);
-            playerStateMachine.Animator.SetFloat("MovementSpeed", 1f, 0.1f, deltaTime);
+            HandleRunning(movement, deltaTime);
         }
 
-        Vector3 CalculateMovement(float deltaTime)
+        private void HandleIdle(float deltaTime)
+        {
+            playerStateMachine.Animator.SetFloat("MovementSpeed", 0, 0.1f, deltaTime);
+            Move(Vector3.zero, deltaTime);
+        }
+
+        private void HandleFastRunning(Vector3 movement, float deltaTime)
+        {
+            var movementSpeed = playerStateMachine.FastRunningSpeed;
+            playerStateMachine.Animator.SetFloat("MovementSpeed", 2f, 0.1f, deltaTime);
+            Move(movement * movementSpeed, deltaTime);
+        }
+
+        private void HandleRunning(Vector3 movement, float deltaTime)
+        {
+            var movementSpeed = playerStateMachine.RunningSpeed;
+            playerStateMachine.Animator.SetFloat("MovementSpeed", 1f, 0.1f, deltaTime);
+            Move(movement * movementSpeed, deltaTime);
+        }
+
+        private Vector3 CalculateMovement(float deltaTime)
         {
             float horizontal = playerStateMachine.InputReader.MovementValue.x;
             float vertical = playerStateMachine.InputReader.MovementValue.y;
@@ -54,7 +87,7 @@ namespace Scripts.Game.StateMachine.Player
             return move;
         }
 
-        Vector3 CalculateRotation(float horizontal, float vertical, float deltaTime)
+        private Vector3 CalculateRotation(float horizontal, float vertical, float deltaTime)
         {
             float cameraAngle = playerStateMachine.MainCamera.eulerAngles.y;
             float targeAngle = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg + cameraAngle;
@@ -68,11 +101,21 @@ namespace Scripts.Game.StateMachine.Player
             return direction * Vector3.forward;
         }
 
-        void HandleTarget()
+        private void OnTarget()
         {
             if (!playerStateMachine.Targeter.SelectTarget()) return;
 
             playerStateMachine.SwitchState(new PlayerTargetingState(playerStateMachine));
+        }
+
+        private void OnDodge(InputAction.CallbackContext context)
+        {
+            _isDodgePressed = context.ReadValueAsButton();
+        }
+
+        private void OnJump()
+        {
+            playerStateMachine.SwitchState(new PlayerJumpingState(playerStateMachine));
         }
     }
 }
