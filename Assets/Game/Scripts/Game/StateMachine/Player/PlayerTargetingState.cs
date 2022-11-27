@@ -12,7 +12,6 @@ public class PlayerTargetingState : PlayerBaseState
         
         playerStateMachine.Animator.CrossFadeInFixedTime("TargetingBlendTree", 0.1f);
         playerStateMachine.Animator.SetLayerWeight(1, 1f);
-        playerStateMachine.EquippedWeapon.GetWeapon();
     }
 
     public override void Exit()
@@ -21,7 +20,11 @@ public class PlayerTargetingState : PlayerBaseState
         playerStateMachine.InputReader.JumpEvent -= OnJump;
 
         playerStateMachine.Animator.SetLayerWeight(1, 0);
-        playerStateMachine.EquippedWeapon.SaveWeapon();
+        
+        if (playerStateMachine.Targeter.CurrentTarget == null)
+        {
+            playerStateMachine.EquippedWeapon.SaveWeapon();
+        }
     }
 
     public override void Tick(float deltaTime)
@@ -46,6 +49,7 @@ public class PlayerTargetingState : PlayerBaseState
 
     void HandleCancelTargeting()
     {
+        playerStateMachine.Targeter.Cancel();
         playerStateMachine.SwitchState(new PlayerGroundedState(playerStateMachine));
     }
 

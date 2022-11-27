@@ -12,7 +12,6 @@ namespace Scripts.Game.StateMachine.Player
         public PlayerAttackState(PlayerStateMachine playerStateMachine, int attackIndex) : base(playerStateMachine)
         {
             _currentAttack = playerStateMachine.Attacks[attackIndex];
-            Debug.Log("Attack: " + _currentAttack.AttackName);
         }
 
         public override void Enter()
@@ -101,9 +100,6 @@ namespace Scripts.Game.StateMachine.Player
         {
             int currentAttack = playerStateMachine.CurrentAttack;
             int lastAttack = playerStateMachine.Attacks.Length - 1;
-
-            Debug.Log("Current Attack: "+currentAttack);
-            Debug.Log("Last Attack: " + lastAttack);
 
             if (currentAttack == lastAttack) 
             {
