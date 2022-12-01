@@ -5,7 +5,8 @@ public class Target : MonoBehaviour
 {
     public Action<Target> DestroyEvent;
 
-    private void OnDestroy() {
+    private void OnDestroy() 
+    {
         DestroyEvent?.Invoke(this);
     }
 }

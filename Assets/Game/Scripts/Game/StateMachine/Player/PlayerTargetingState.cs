@@ -1,4 +1,5 @@
 using Scripts.Game.StateMachine.Player;
+using Scripts.UI;
 using UnityEngine;
 
 public class PlayerTargetingState : PlayerBaseState
@@ -9,9 +10,9 @@ public class PlayerTargetingState : PlayerBaseState
     {
         playerStateMachine.InputReader.TargetEvent += HandleCancelTargeting;
         playerStateMachine.InputReader.JumpEvent += OnJump;
-        
+        playerStateMachine.EquippedWeapon.GetWeapon();
         playerStateMachine.Animator.CrossFadeInFixedTime("TargetingBlendTree", 0.1f);
-        playerStateMachine.Animator.SetLayerWeight(1, 1f);
+        UIManager.Instance.uiGameplay.SelectTarget();
     }
 
     public override void Exit()
@@ -19,8 +20,8 @@ public class PlayerTargetingState : PlayerBaseState
         playerStateMachine.InputReader.TargetEvent -= HandleCancelTargeting;
         playerStateMachine.InputReader.JumpEvent -= OnJump;
 
-        playerStateMachine.Animator.SetLayerWeight(1, 0);
-        
+        UIManager.Instance.uiGameplay.CancelTarget();
+
         if (playerStateMachine.Targeter.CurrentTarget == null)
         {
             playerStateMachine.EquippedWeapon.SaveWeapon();
@@ -29,6 +30,7 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+
         if(playerStateMachine.InputReader.IsAttacking)
         {
             playerStateMachine.SwitchState(new PlayerAttackState(playerStateMachine, playerStateMachine.CurrentAttack));
@@ -39,6 +41,12 @@ public class PlayerTargetingState : PlayerBaseState
         {
             playerStateMachine.SwitchState(new PlayerGroundedState(playerStateMachine));
             return;
+        }
+        else
+        {
+            var target = playerStateMachine.Targeter.CurrentTarget;
+            var targetPosition = Camera.main.WorldToScreenPoint(target.gameObject.transform.position);
+            UIManager.Instance.uiGameplay.SetPositionTarget(targetPosition);
         }
 
         Vector3 movement = CalculateMovement();

@@ -24,6 +24,7 @@ namespace Scripts.Game.StateMachine.Player
 
         public override void Tick(float deltaTime)
         {
+            FaceTarget();
             Move(_momentum, deltaTime);
 
             if(-playerStateMachine.CharacterController.velocity.y <= 0) 
@@ -31,8 +32,6 @@ namespace Scripts.Game.StateMachine.Player
                 playerStateMachine.SwitchState(new PlayerFallingState(playerStateMachine));
                 return;
             }
-
-            FaceTarget();
         }
     }
 }

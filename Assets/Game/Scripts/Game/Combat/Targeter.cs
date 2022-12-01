@@ -22,10 +22,6 @@ namespace Scripts.Game.Combat
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent<Target>(out Target target)) return;
-            
-            print("Inimigo");
-            
-            playerStateMachine.Animator.SetBool("IsEquippingTheWeapon", true);
             _targets.Add(target);
             target.DestroyEvent += RemoveTarget;
         }
