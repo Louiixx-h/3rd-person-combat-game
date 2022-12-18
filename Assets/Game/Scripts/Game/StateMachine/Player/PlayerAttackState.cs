@@ -1,6 +1,3 @@
-
-using UnityEngine;
-
 namespace Scripts.Game.StateMachine.Player
 {
     public class PlayerAttackState : PlayerBaseState
