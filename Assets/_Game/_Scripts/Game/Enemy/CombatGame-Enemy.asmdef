@@ -1,0 +1,17 @@
+{
+    "name": "CombatGame-Enemy",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7314d09624a696d4caebd4bf4969b5ef",
+        "GUID:e2578de207f3cb2409b50f82f5f269c4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
