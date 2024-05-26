@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using UnityEditor;
 
-namespace AlienWaves.CoreDI
+namespace LuisLabs.CoreDI
 {
     public class ServiceLocator : MonoBehaviour
     {

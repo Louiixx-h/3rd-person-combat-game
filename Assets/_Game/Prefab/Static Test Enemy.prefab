@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5859955685271594283
 Transform:
   m_ObjectHideFlags: 0
@@ -133,6 +133,9 @@ MonoBehaviour:
   maxLife: 200
   healthSprite: {fileID: 3236236110186566824}
   agent: {fileID: 0}
+  animator: {fileID: 0}
+  distanceAttack: 0
+  distanceVision: 0
   characterController: {fileID: 7705975288678816474}
   forceReceiver: {fileID: 3703719968222927086}
   movementSpeed: 0

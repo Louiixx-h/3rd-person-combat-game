@@ -6,10 +6,10 @@ namespace CombatGame.Commons.Combat
 {
     public class Targeter : MonoBehaviour
     {
-        [HideInInspector] public Target CurrentTarget { get; private set; }
+        public Target CurrentTarget { get; private set; }
         [SerializeField] private CinemachineTargetGroup _cineTargetGroup;
 
-        private List<Target> _targets = new List<Target>();
+        private readonly List<Target> _targets = new();
         private Camera _mainCamera;
 
         private void Start()
@@ -19,16 +19,13 @@ namespace CombatGame.Commons.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent<Target>(out Target target)) return;
-
-            _targets.Add(target);
-            target.DestroyEvent += RemoveTarget;
+            if (!other.TryGetComponent(out Target target)) return;
+            AddTarget(target);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.TryGetComponent<Target>(out Target target)) return;
-
+            if (!other.TryGetComponent(out Target target)) return;
             RemoveTarget(target);
         }
 
@@ -69,6 +66,12 @@ namespace CombatGame.Commons.Combat
 
             _cineTargetGroup.RemoveMember(CurrentTarget.transform);
             CurrentTarget = null;
+        }
+
+        private void AddTarget(Target target)
+        {
+            _targets.Add(target);
+            target.DestroyEvent += RemoveTarget;
         }
 
         void RemoveTarget(Target target)

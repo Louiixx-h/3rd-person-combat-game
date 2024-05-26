@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CombatGame.Commons 
+namespace CombatGame.Commons.Utils
 {
     public class LookTarget : MonoBehaviour
     {
@@ -13,6 +13,7 @@ namespace CombatGame.Commons
 
         private void Update()
         {
+            if (_camera == null) return;
             transform.LookAt(_camera.transform);
         }
     }

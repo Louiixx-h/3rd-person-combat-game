@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AlienWaves.CoreDI
+namespace LuisLabs.CoreDI
 {
     public class ServiceManager
     {

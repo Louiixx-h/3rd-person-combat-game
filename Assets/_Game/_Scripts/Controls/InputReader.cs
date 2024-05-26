@@ -6,6 +6,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     public bool IsAttacking { get; private set; }
     public bool IsDodging { get; private set; }
+    public bool IsBlocking { get; private set; }
     public Vector2 MovementValue {get; private set;}
     public Action JumpEvent;
     public Action RollEvent;
@@ -24,6 +25,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         _controls?.Player.Disable();
     }
+
+    public void OnLook(InputAction.CallbackContext context) { }
 
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -61,5 +64,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         RollEvent?.Invoke();
     }
 
-    public void OnLook(InputAction.CallbackContext context) {}
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        IsBlocking = context.ReadValueAsButton();
+    }
 }

@@ -6,12 +6,12 @@ namespace CombatGame.Commons.Weapons
     {
         [SerializeField] private GameObject _weaponLogic;
 
-        public void EnableWeapon()
+        public void EnableWeaponCollider()
         {
             _weaponLogic.SetActive(true);
         }
 
-        public void DisableWeapon()
+        public void DisableWeaponCollider()
         {
             _weaponLogic.SetActive(false);
         }

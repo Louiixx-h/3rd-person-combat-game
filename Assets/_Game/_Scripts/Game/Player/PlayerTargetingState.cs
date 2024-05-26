@@ -10,15 +10,7 @@ namespace CombatGame.Player
 
         public override void Enter()
         {
-            if (!context.IsTargeting)
-            {
-                context.IsTargeting = true;
-                context.Animator.CrossFadeInFixedTime("Unarmed Weapon", 0.1f);
-            }
-            else
-            {
-                context.Animator.CrossFadeInFixedTime("TargetingBlendTree", 0.1f);
-            }
+            animator.CrossFadeInFixedTime(context.AnimationClips[AnimationName.Targeting], 0.1f);
             context.InputReader.TargetEvent += HandleCancelTargeting;
             context.InputReader.RollEvent += Roll;
         }
@@ -26,8 +18,7 @@ namespace CombatGame.Player
         public override void Exit()
         {
             context.InputReader.TargetEvent -= HandleCancelTargeting;
-            context.Animator.SetLayerWeight(1, 0);
-            context.EquippedWeapon.SaveWeapon();
+            animator.SetLayerWeight(1, 0);
             context.InputReader.RollEvent -= Roll;
         }
 
@@ -53,30 +44,29 @@ namespace CombatGame.Player
 
         void HandleCancelTargeting()
         {
-            context.IsTargeting = false;
-            context.SwitchState(new PlayerGroundedState(context));
+            context.Targeter.Cancel();
         }
 
         void HandleAnimator(float deltaTime)
         {
             if (context.InputReader.MovementValue.y == 0)
             {
-                context.Animator.SetFloat("TargetingForward", 0, 0.1f, deltaTime);
+                animator.SetFloat("TargetingForward", 0, 0.1f, deltaTime);
             }
             else
             {
                 float value = context.InputReader.MovementValue.y > 0 ? 1f : -1f;
-                context.Animator.SetFloat("TargetingForward", value, 0.1f, deltaTime);
+                animator.SetFloat("TargetingForward", value, 0.1f, deltaTime);
             }
 
             if (context.InputReader.MovementValue.x == 0)
             {
-                context.Animator.SetFloat("TargetingRight", 0, 0.1f, deltaTime);
+                animator.SetFloat("TargetingRight", 0, 0.1f, deltaTime);
             }
             else
             {
                 float value = context.InputReader.MovementValue.x > 0 ? 1f : -1f;
-                context.Animator.SetFloat("TargetingRight", value, 0.1f, deltaTime);
+                animator.SetFloat("TargetingRight", value, 0.1f, deltaTime);
             }
         }
 
@@ -93,7 +83,10 @@ namespace CombatGame.Player
 
         private void Roll()
         {
-            context.SwitchState(new PlayerRollState(context, _targetDirection));
+            if (context.Grounded)
+            {
+                context.SwitchState(new PlayerRollState(context));
+            }
         }
     }
 }

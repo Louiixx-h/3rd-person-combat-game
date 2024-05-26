@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AlienWaves.CoreDI
+namespace LuisLabs.CoreDI
 {
     [AddComponentMenu("SeviceLocator/Service Locator Scene")]
     public class ServiceLocatorSceneBootstrapper : ServiceLocatorBootstrapper

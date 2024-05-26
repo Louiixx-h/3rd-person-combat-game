@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AlienWaves.CoreDI
+namespace LuisLabs.CoreDI
 {
     public sealed class ServiceModule : MonoBehaviour
     {

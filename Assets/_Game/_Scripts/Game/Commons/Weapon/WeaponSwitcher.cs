@@ -5,22 +5,22 @@ namespace CombatGame.Commons.Weapons
     public class WeaponSwitcher : MonoBehaviour
     {
         [SerializeField] private GameObject _weaponInUse;
-        [SerializeField] private GameObject _holsteredWeapon;
+        [SerializeField] private GameObject _savedWeapon;
 
-        public void GetWeapon()
+        public void Use()
         {
-            if (_holsteredWeapon == null || _weaponInUse == null) return;
+            if (_savedWeapon == null || _weaponInUse == null) return;
 
             _weaponInUse.SetActive(true);
-            _holsteredWeapon.SetActive(false);
+            _savedWeapon.SetActive(false);
         }
 
-        public void SaveWeapon()
+        public void Save()
         {
-            if (_holsteredWeapon == null || _weaponInUse == null) return;
+            if (_savedWeapon == null || _weaponInUse == null) return;
 
             _weaponInUse.SetActive(false);
-            _holsteredWeapon.SetActive(true);
+            _savedWeapon.SetActive(true);
         }
     }
 }

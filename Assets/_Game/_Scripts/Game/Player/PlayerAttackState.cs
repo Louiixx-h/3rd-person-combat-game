@@ -1,4 +1,5 @@
 using CombatGame.Commons.Combat;
+using UnityEngine;
 
 namespace CombatGame.Player
 {
@@ -15,16 +16,26 @@ namespace CombatGame.Player
 
         public override void Enter()
         {
-            context.WeaponHandler.EnableWeapon();
+            context.WeaponHandler.EnableWeaponCollider();
             context.WeaponDamage.SetDamage(_currentAttack.Damage, _currentAttack.KnockBack);
-            context.EquippedWeapon.GetWeapon();
-            context.Animator.CrossFadeInFixedTime(_currentAttack.AttackName, _currentAttack.TransitionDuration);
+            animator.CrossFadeInFixedTime(_currentAttack.AttackName, _currentAttack.TransitionDuration);
+
+            float horizontal = context.InputReader.MovementValue.x;
+            float vertical = context.InputReader.MovementValue.y;
+            float cameraAngle = 0;
+            if (context.MainCamera != null)
+            {
+                cameraAngle = context.MainCamera.transform.eulerAngles.y;
+            }
+            var targetRotation = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg + cameraAngle;
+            context.transform.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
+
             SetCurrentAttack();
         }
 
         public override void Exit()
         {
-            context.WeaponHandler.DisableWeapon();
+            context.WeaponHandler.DisableWeaponCollider();
         }
 
         public override void Tick(float deltaTime)
