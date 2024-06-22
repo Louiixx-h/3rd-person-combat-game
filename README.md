@@ -1,7 +1,7 @@
-![GitHub repo size](https://img.shields.io/github/repo-size/Louiixx-h/Third-Person-Game?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/Louiixx-h/Third-Person-Game?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/Louiixx-h/Third-Person-Game?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/Louiixx-h/Third-Person-Game?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/Louiixx-h/3rd-person-combat?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/Louiixx-h/3rd-person-combat?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/Louiixx-h/3rd-person-combat?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/Louiixx-h/3rd-person-combat?style=for-the-badge)
 
 # Third Person Combat Game
 
